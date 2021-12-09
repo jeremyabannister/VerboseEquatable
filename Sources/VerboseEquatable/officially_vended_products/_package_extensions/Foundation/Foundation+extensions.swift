@@ -1,5 +1,5 @@
 //
-//  Foundation+VerboseEquatable.swift
+//  Foundation+extensions.swift
 //  
 //
 //  Created by Jeremy Bannister on 12/9/21.
@@ -13,28 +13,6 @@ extension Int: AtomicallyEquatable { }
 extension String: AtomicallyEquatable { }
 extension UInt: AtomicallyEquatable { }
 extension UUID: AtomicallyEquatable { }
-
-///
-public protocol AtomicallyEquatable: VerboseEquatable {
-    
-}
-
-///
-public extension AtomicallyEquatable {
-    
-    ///
-    var equalityCheck: EqualityCheck<Self> {
-        EqualityCheck(self)
-            .addingCheck { rhs in
-                if self != rhs {
-                    throw VerboseEqualityError.unequal(
-                        lhsDescription: "\(self)",
-                        rhsDescription: "\(rhs)"
-                    )
-                }
-            }
-    }
-}
 
 ///
 extension ClosedRange: VerboseEquatable where Bound: VerboseEquatable {
@@ -67,7 +45,7 @@ extension Optional: VerboseEquatable where Wrapped: VerboseEquatable {
 extension Array: VerboseEquatable where Element: VerboseEquatable {
     
     ///
-    public static var typeName: String { "Array<\(Element.self)>" }   
+    public static var typeName: String { "Array<\(Element.self)>" }
 }
 
 ///
