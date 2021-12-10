@@ -9,6 +9,10 @@ let package = Package(
             name: "VerboseEquatable",
             targets: ["VerboseEquatable"]
         ),
+        .library(
+            name: "VerboseEquatableTestToolkit",
+            targets: ["VerboseEquatableTestToolkit"]
+        ),
     ],
     dependencies: [
         .package(
@@ -16,22 +20,43 @@ let package = Package(
             from: "0.1.5"
         ),
         .package(
-            url: "https://github.com/jeremyabannister/ProperValueTypes",
+            url: "https://github.com/jeremyabannister/ProperValueType",
             from: "0.1.0"
         ),
         .package(
-            url: "https://github.com/jeremyabannister/ExpressionErgonomics",
-            from: "0.1.6"
+            url: "https://github.com/jeremyabannister/Testable",
+            from: "0.1.0"
+        ),
+        .package(
+            url: "https://github.com/jeremyabannister/SingleTypeTestCase",
+            from: "0.1.0"
         ),
     ],
     targets: [
         .target(
             name: "VerboseEquatable",
-            dependencies: ["ProperValueTypes", "CollectionToolkit"]
+            dependencies: [
+                "ProperValueType",
+                "CollectionToolkit",
+                "Testable"
+            ]
+        ),
+        .target(
+            name: "VerboseEquatableTestToolkit",
+            dependencies: [
+                "VerboseEquatable",
+                "ProperValueType",
+                "CollectionToolkit",
+                "Testable"
+            ]
         ),
         .testTarget(
             name: "VerboseEquatable-tests",
-            dependencies: ["VerboseEquatable"]
+            dependencies: ["VerboseEquatableTestToolkit"]
+        ),
+        .testTarget(
+            name: "VerboseEquatableTestToolkit-tests",
+            dependencies: ["VerboseEquatableTestToolkit"]
         ),
     ]
 )

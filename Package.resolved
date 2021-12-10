@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "ErrorMessage",
+        "repositoryURL": "https://github.com/jeremyabannister/ErrorMessage",
+        "state": {
+          "branch": null,
+          "revision": "ca71df3b26edae39ccd949fc2a763f38a91635f5",
+          "version": "0.1.0"
+        }
+      },
+      {
         "package": "ExpressionErgonomics",
         "repositoryURL": "https://github.com/jeremyabannister/ExpressionErgonomics",
         "state": {
@@ -29,11 +38,11 @@
         }
       },
       {
-        "package": "ProperValueTypes",
-        "repositoryURL": "https://github.com/jeremyabannister/ProperValueTypes",
+        "package": "ProperValueType",
+        "repositoryURL": "https://github.com/jeremyabannister/ProperValueType",
         "state": {
           "branch": null,
-          "revision": "09d71b8f30d6175477af1c650f2f2490031e8bff",
+          "revision": "fff4702852d0658676da1896c93625e7ff4b0f7d",
           "version": "0.1.0"
         }
       },
@@ -44,6 +53,15 @@
           "branch": null,
           "revision": "dc27986f20a91cf2acc0d537cabee98539dee40b",
           "version": "0.1.1"
+        }
+      },
+      {
+        "package": "Testable",
+        "repositoryURL": "https://github.com/jeremyabannister/Testable",
+        "state": {
+          "branch": null,
+          "revision": "3348e30f56af3968664f2bbfb2887a0fc9e8b869",
+          "version": "0.1.0"
         }
       },
       {
