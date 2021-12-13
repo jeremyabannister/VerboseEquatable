@@ -39,7 +39,8 @@ let package = Package(
         .target(
             name: "VerboseEquatableTestToolkit",
             dependencies: [
-                "VerboseEquatable"
+                "VerboseEquatable",
+                .product(name: "TestableTestToolkit", package: "Testable")
             ]
         ),
         .testTarget(
