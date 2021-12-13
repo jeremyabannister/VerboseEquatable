@@ -16,20 +16,16 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/jeremyabannister/CollectionToolkit",
-            from: "0.1.5"
-        ),
-        .package(
             url: "https://github.com/jeremyabannister/ProperValueType",
             from: "0.1.0"
         ),
         .package(
-            url: "https://github.com/jeremyabannister/Testable",
-            from: "0.1.0"
+            url: "https://github.com/jeremyabannister/ExpressionErgonomics",
+            from: "0.1.8"
         ),
         .package(
-            url: "https://github.com/jeremyabannister/SingleTypeTestCase",
-            from: "0.1.0"
+            url: "https://github.com/jeremyabannister/Testable",
+            from: "0.1.2"
         ),
     ],
     targets: [
@@ -37,17 +33,13 @@ let package = Package(
             name: "VerboseEquatable",
             dependencies: [
                 "ProperValueType",
-                "CollectionToolkit",
                 "Testable"
             ]
         ),
         .target(
             name: "VerboseEquatableTestToolkit",
             dependencies: [
-                "VerboseEquatable",
-                "ProperValueType",
-                "CollectionToolkit",
-                "Testable"
+                "VerboseEquatable"
             ]
         ),
         .testTarget(

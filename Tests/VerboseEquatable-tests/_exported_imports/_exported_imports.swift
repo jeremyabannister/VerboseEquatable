@@ -6,5 +6,4 @@
 //
 
 ///
-@_exported import VerboseEquatable
-@_exported import SingleTypeTestCase
+@_exported import VerboseEquatableTestToolkit

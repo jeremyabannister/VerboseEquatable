@@ -7,6 +7,3 @@
 
 ///
 @_exported import VerboseEquatable
-@_exported import ProperValueType
-@_exported import CollectionToolkit
-@_exported import Testable

@@ -10,15 +10,15 @@ public extension Testable where Self: VerboseEquatable {
     
     ///
     @discardableResult
-    func assertVerboseEqual (to other: Self) throws -> Self {
-        try verboseCompare(self, to: other)
-        return self
+    func assertVerboseEqualTo (_ value: ()->Self) throws -> Self {
+        try self.assertVerboseEqual(to: value())
     }
     
     ///
     @discardableResult
-    func assertVerboseEqualTo (_ value: ()->Self) throws -> Self {
-        try self.assertVerboseEqual(to: value())
+    func assertVerboseEqual (to other: Self) throws -> Self {
+        try verboseCompare(self, to: other)
+        return self
     }
 }
 

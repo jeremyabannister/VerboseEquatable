@@ -7,5 +7,4 @@
 
 ///
 @_exported import ProperValueType
-@_exported import CollectionToolkit
 @_exported import Testable

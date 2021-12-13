@@ -7,7 +7,8 @@
 
 ///
 public struct VerboseEqualityError: ProperValueType,
-                                    Error {
+                                    Error,
+                                    CustomStringConvertible {
     
     ///
     public var discrepancies: [Discrepancy]
@@ -15,6 +16,18 @@ public struct VerboseEqualityError: ProperValueType,
     ///
     public init (discrepancies: [Discrepancy]) {
         self.discrepancies = discrepancies
+    }
+}
+
+///
+public extension VerboseEqualityError {
+    
+    ///
+    var description: String {
+        discrepancies
+            .map { $0.description }
+            .joined(separator: "\n")
+            .prepending("\n")
     }
 }
 
@@ -54,7 +67,8 @@ public extension VerboseEqualityError {
 public extension VerboseEqualityError {
     
     ///
-    struct Discrepancy: ProperValueType {
+    struct Discrepancy: ProperValueType,
+                        CustomStringConvertible {
         
         ///
         public var keyPath: [String]
@@ -74,5 +88,14 @@ public extension VerboseEqualityError {
             self.lhsDescription = lhsDescription
             self.rhsDescription = rhsDescription
         }
+    }
+}
+
+///
+public extension VerboseEqualityError.Discrepancy {
+    
+    ///
+    var description: String {
+        "\(keyPath.joined(separator: ".")): \(lhsDescription), \(rhsDescription)"
     }
 }

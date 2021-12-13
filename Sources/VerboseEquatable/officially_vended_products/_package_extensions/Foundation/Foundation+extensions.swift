@@ -46,20 +46,29 @@ extension Array: VerboseEquatable where Element: VerboseEquatable {
     
     ///
     public static var typeName: String { "Array<\(Element.self)>" }
-}
-
-///
-public extension Array where Element: VerboseEquatable {
     
     ///
-    var equalityCheck: EqualityCheck<Self> {
+    public var equalityCheck: EqualityCheck<Self> {
         EqualityCheck(self)
             .compare(\.count, "count")
             .mutated { check in
-                self.forEachWithIndex { index, element in
+                self.indices.forEach { index in
                     check = check.compare(\.[safely: index], "[\(index)]")
                 }
             }
+    }
+}
+
+///
+fileprivate extension Array {
+    
+    ///
+    subscript (safely index: Int) -> Element? {
+        if self.count.isGreaterThanOrEqual(to: index) {
+            return self[index]
+        } else {
+            return nil
+        }
     }
 }
 
@@ -84,7 +93,7 @@ extension Dictionary.Keys: VerboseEquatable where Key: VerboseEquatable {
     
     ///
     public var equalityCheck: EqualityCheck<Self> {
-        .mapping(self, { $0.asSet() })
+        .mapping(self, { Set($0) })
     }
 }
 
@@ -96,12 +105,32 @@ extension Set: VerboseEquatable where Element: VerboseEquatable {
     
     ///
     public var equalityCheck: EqualityCheck<Self> {
-        EqualityCheck(self).addingCheck { rhs in
-            try self.subtracting(rhs).asArray
-                .equalityCheck
-                .checkAgainst(
-                    rhs.subtracting(self).asArray
-                )
-        }
+        EqualityCheck(self)
+            .compare(\.count, "count")
+            .addingCheck { rhs in
+                
+                ///
+                let uniqueToLHS = self.subtracting(rhs)
+                let uniqueToRHS = rhs.subtracting(self)
+                
+                ///
+                func mapToDiscrepancies (_ set: Self, isLHS: Bool) -> [VerboseEqualityError.Discrepancy] {
+                    set
+                        .map {
+                            .init(
+                                keyPath: ["(contains \($0))"],
+                                lhsDescription: "\(isLHS)",
+                                rhsDescription: "\(!isLHS)"
+                            )
+                        }
+                }
+                
+                ///
+                if uniqueToLHS.isNotEmpty.or(uniqueToRHS.isNotEmpty) {
+                    throw VerboseEqualityError(
+                        discrepancies: mapToDiscrepancies(uniqueToLHS, isLHS: true) + mapToDiscrepancies(uniqueToRHS, isLHS: false)
+                    )
+                }
+            }
     }
 }

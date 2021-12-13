@@ -109,5 +109,3 @@ final class VerboseEquatable_tests: SingleTypeTestCase {
         }
     }
 }
-
-extension VerboseEqualityError: Testable { }
